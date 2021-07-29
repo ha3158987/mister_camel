@@ -1,4 +1,4 @@
-import {Route, Switch} from 'react-router-dom';
+import routes from 'routes/routes.js';
 function App() {
   return (
     <div>
