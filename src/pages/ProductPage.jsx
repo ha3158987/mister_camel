@@ -1,0 +1,14 @@
+import React, { Component } from 'react'
+
+class ProductPage extends Component {
+  render() {
+    return (
+      <div>
+        
+      </div>
+    )
+  }
+}
+
+export default ProductPage;
+// 전체 상품 리스트가 보여지는 페이지
