@@ -1,16 +1,17 @@
-import {Route, Switch} from 'react-router-dom';
+import { Component } from 'react';
+import { Route } from 'react-router-dom';
 
-class Routes {
-  constructor(){}
+import ProductPage from 'pages/ProductPage';
+import RecentListPage from 'pages/RecentListPage';
 
+class Routes extends Component {
   render() {
     return (
-      <Router>
-        <Route>
-
-        </Route>
-      </Router>
-    )
+      <>
+        <Route exact path="/" component={ProductPage} />
+        <Route path="/recentList" component={RecentListPage} />
+      </>
+    );
   }
 }
 
