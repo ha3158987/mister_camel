@@ -25,9 +25,9 @@ class ProductList extends Component {
   handleRandomButtonClick = () => {
     const lists = [];
     const itemLists = this.state.lists.map(item => item);
-    for (let i = 0; i < this.props.products.length; i++) {
+    for (let i = 0; i < this.props.products.length - 1; i++) {
       const randomLists = Math.floor(Math.random() * (itemLists.length - 1));
-      lists.push(itemLists[randomLists]);
+      lists.push(itemLists[randomLists + 1]);
     }
     this.setState({
       lists,
