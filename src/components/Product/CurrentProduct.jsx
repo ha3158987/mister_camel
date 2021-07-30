@@ -3,16 +3,12 @@ import styled from '@emotion/styled';
 
 const ProductWrapper = styled.div`
   display: flex;
+  gap: 5%;
   border: 1px solid #333;
   padding: 20px;
 
   & > div {
     width: 50%;
-    margin-right: 5%;
-  }
-
-  & > div:last-child {
-    margin-right: 0;
   }
 `;
 
@@ -23,20 +19,18 @@ const Img = styled.img`
 const ProductTextBlock = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 `;
 
 const Title = styled.span`
-  font-size: 32px;
-  letter-spacing: 5px;
+  font-size: 30px;
   margin-bottom: 16px;
 `;
 
 const Tag = styled.span`
-  width: 80px;
-  height: 30px;
   border: 1px solid #333;
+  padding: 5px 10px;
   border-radius: 5px;
-  line-height: 30px;
   text-align: center;
 `;
 
@@ -46,10 +40,8 @@ const Price = styled.span`
 `;
 
 class CurrentProduct extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
+    const { products } = this.props;
     return (
       <ProductWrapper>
         <div>
@@ -59,9 +51,9 @@ class CurrentProduct extends Component {
           />
         </div>
         <ProductTextBlock>
-          <Title>구찌 라이톤 38 사이즈</Title>
-          <Tag>구찌</Tag>
-          <Price>190,000원</Price>
+          <Title>{products[0].title}</Title>
+          <Tag>{products[0].brand}</Tag>
+          <Price>{products[0].price}</Price>
         </ProductTextBlock>
       </ProductWrapper>
     );
