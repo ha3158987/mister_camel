@@ -16,34 +16,31 @@ const RandmoButton = styled(ButtonStyle)`
 
 class ProductList extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
-    lists: this.props.products,
-    }
+      lists: this.props.products,
+    };
   }
 
   handleRandomButtonClick = () => {
     const lists = [];
     const itemLists = this.state.lists.map(item => item);
-    for (let i = 0; i < this.props.products.length; i++) {
+    for (let i = 0; i < this.props.products.length - 1; i++) {
       const randomLists = Math.floor(Math.random() * (itemLists.length - 1));
-      lists.push(itemLists[randomLists]);
+      lists.push(itemLists[randomLists + 1]);
     }
     this.setState({
       lists,
     });
   };
 
-  // handleItemClick = e => {
-  //   console.log('아이템 클릭');
-  // };
   handleButtonClick = e => {
     e.stopPropagation();
     console.log('관심 없음 버튼 클릭');
   };
 
   render() {
-    const { products,handleItemClick } = this.props;
+    const { products, handleItemClick } = this.props;
     const { lists } = this.state;
     return (
       <>
@@ -68,23 +65,40 @@ class ProductList extends Component {
               ))}
           </List>
         ) : (
-       <List>
-        {products && products.map(({ title, brand, price }, index) => (
-          <ListItem
-            key={index}
-            title={title}
-            brand={brand}
-            price={price}
-            onClick={() => handleItemClick({ id : index, isInterested: true, title, brand, price })}
-          >
-            <Button
-              onClick={() => this.handleNoInterestBtnClick.bind({ id : index, isInterested: false, title, brand, price })}
-            >
-              관심 없음
-            </Button>
-          </ListItem>
-        ))}
-      </List>
+          <List>
+            {products &&
+              products.map(({ title, brand, price }, index) => (
+                <ListItem
+                  key={index}
+                  title={title}
+                  brand={brand}
+                  price={price}
+                  onClick={() =>
+                    handleItemClick({
+                      id: index,
+                      isInterested: true,
+                      title,
+                      brand,
+                      price,
+                    })
+                  }
+                >
+                  <Button
+                    onClick={() =>
+                      this.handleNoInterestBtnClick.bind({
+                        id: index,
+                        isInterested: false,
+                        title,
+                        brand,
+                        price,
+                      })
+                    }
+                  >
+                    관심 없음
+                  </Button>
+                </ListItem>
+              ))}
+          </List>
         )}
       </>
     );
