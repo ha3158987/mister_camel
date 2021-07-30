@@ -73,7 +73,9 @@ class FilterBtns extends Component {
     });
     console.log(`${name} 클릭`);
   };
+
   render() {
+    const { onChangeHandler } = this.props;
     return (
       <FilterBtnsStyle>
         <div>
@@ -117,6 +119,7 @@ class FilterBtns extends Component {
           <FilterPopup
             popupVisible={this.state.popupVisible}
             setPopupState={this.setPopupState}
+            onChangeHandler={onChangeHandler}
           />
         </div>
       </FilterBtnsStyle>

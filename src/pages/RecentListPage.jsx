@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-import Filter from 'components/recentList/Filter';
-import RecentProductList from 'components/recentList/RecentProductList';
+import { Filter, RecentProductList } from 'components/recentList';
 
 import PRODUCTS from 'fixture/productsData';
 

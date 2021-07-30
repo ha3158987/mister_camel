@@ -30,7 +30,7 @@ const CloseButtonStyle = styled(Button)`
 
 class FilterPopup extends Component {
   render() {
-    const { popupVisible, setPopupState } = this.props;
+    const { popupVisible, setPopupState, onChangeHandler } = this.props;
     return (
       <FilterPopupStyle popupVisible={popupVisible}>
         <CloseButtonStyle
@@ -40,10 +40,20 @@ class FilterPopup extends Component {
         >
           <IoClose />
         </CloseButtonStyle>
-        <InputGroup type={'radio'} name={'sort_filter'} value={'recent_view'}>
+        <InputGroup
+          type={'radio'}
+          name={'sort_filter'}
+          value={'recent_view'}
+          onChangeHandler={onChangeHandler}
+        >
           최근 조회 순
         </InputGroup>
-        <InputGroup type={'radio'} name={'sort_filter'} value={'row_price'}>
+        <InputGroup
+          type={'radio'}
+          name={'sort_filter'}
+          value={'row_price'}
+          onChangeHandler={onChangeHandler}
+        >
           낮은 가격 순
         </InputGroup>
       </FilterPopupStyle>
