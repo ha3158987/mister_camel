@@ -5,28 +5,28 @@ import ListItem from 'components/common/ListItem';
 import Button from 'components/common/Button';
 
 class ProductList extends Component {
-  handleItemClick = e => {
-    console.log('아이템 클릭');
-  };
+  constructor(props) {
+    super(props);
+  }
 
   handleButtonClick = e => {
     e.stopPropagation();
-
     console.log('관심 없음 버튼 클릭');
   };
 
   render() {
-    const { products } = this.props;
+    const { products, handleItemClick } = this.props;
+    console.log("products",products);
 
     return (
-      <List>
-        {products.map(({ title, brand, price }, index) => (
+       <List>
+        {products && products.map(({ title, brand, price }, index) => (
           <ListItem
             key={index}
             title={title}
             brand={brand}
             price={price}
-            onClick={this.handleItemClick}
+            onClick={() => handleItemClick({ title, brand, price , id : index})}
           >
             <Button onClick={this.handleButtonClick}>관심 없음</Button>
           </ListItem>
