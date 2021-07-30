@@ -15,9 +15,12 @@ const RandmoButton = styled(ButtonStyle)`
 `;
 
 class ProductList extends Component {
-  state = {
-    lists: this.props.products,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      lists: this.props.products,
+    };
+  }
 
   handleRandomButtonClick = () => {
     const lists = [];
@@ -33,12 +36,11 @@ class ProductList extends Component {
 
   handleButtonClick = e => {
     e.stopPropagation();
-
     console.log('관심 없음 버튼 클릭');
   };
 
   render() {
-    const { products } = this.props;
+    const { products, handleItemClick } = this.props;
     const { lists } = this.state;
     return (
       <>
@@ -56,7 +58,9 @@ class ProductList extends Component {
                   title={title}
                   brand={brand}
                   price={price}
-                  onClick={this.handleItemClick}
+                  onClick={() =>
+                    handleItemClick({ title, brand, price, id: index })
+                  }
                 >
                   <Button onClick={this.handleButtonClick}>관심 없음</Button>
                 </ListItem>
@@ -71,7 +75,9 @@ class ProductList extends Component {
                   title={title}
                   brand={brand}
                   price={price}
-                  onClick={this.handleItemClick}
+                  onClick={() =>
+                    handleItemClick({ title, brand, price, id: index })
+                  }
                 >
                   <Button onClick={this.handleButtonClick}>관심 없음</Button>
                 </ListItem>

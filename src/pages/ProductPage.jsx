@@ -5,8 +5,21 @@ import ProductList from 'components/product/ProductList';
 import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
-  state = {
-    products: PRODUCTS,
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: PRODUCTS,
+      latestClickedItem: null,
+    };
+  }
+
+  handleItemClick = latestClickedItem => {
+    this.setState({
+      ...this.state,
+      latestClickedItem,
+    });
+    //localStorage 저장
+    console.log('아이템 클릭', this.state);
   };
 
   render() {
@@ -14,7 +27,10 @@ class ProductPage extends Component {
     return (
       <div>
         <CurrentProduct products={products} />
-        <ProductList products={products} />
+        <ProductList
+          products={this.state.products}
+          handleItemClick={this.handleItemClick}
+        />
       </div>
     );
   }
