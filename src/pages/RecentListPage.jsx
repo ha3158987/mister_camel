@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Filter from 'components/RecentList/Filter';
 import RecentProductList from 'components/RecentList/RecentProductList';
 
