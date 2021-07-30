@@ -34,9 +34,9 @@ class ProductList extends Component {
     });
   };
 
-  handleItemClick = e => {
-    console.log('아이템 클릭');
-  };
+  // handleItemClick = e => {
+  //   console.log('아이템 클릭');
+  // };
   handleButtonClick = e => {
     e.stopPropagation();
     console.log('관심 없음 버튼 클릭');
@@ -61,7 +61,7 @@ class ProductList extends Component {
                   title={title}
                   brand={brand}
                   price={price}
-                  onClick={this.handleItemClick}
+                  onClick={() => handleItemClick({ id : index, isInterested: true, title, brand, price })}
                 >
                   <Button onClick={this.handleButtonClick}>관심 없음</Button>
                 </ListItem>

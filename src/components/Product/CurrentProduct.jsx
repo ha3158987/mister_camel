@@ -41,7 +41,10 @@ const Price = styled.span`
 
 class CurrentProduct extends Component {
   render() {
-    const { products } = this.props;
+    const { latestClickedItem } = this.props;
+    console.log(latestClickedItem);
+    const { title, brand, price } = latestClickedItem;
+
     return (
       <ProductWrapper>
         <div>
@@ -51,9 +54,9 @@ class CurrentProduct extends Component {
           />
         </div>
         <ProductTextBlock>
-          <Title>{products[0].title}</Title>
-          <Tag>{products[0].brand}</Tag>
-          <Price>{products[0].price}</Price>
+          <Title>{title}</Title>
+          <Tag>{brand}</Tag>
+          <Price>{price}</Price>
         </ProductTextBlock>
       </ProductWrapper>
     );
