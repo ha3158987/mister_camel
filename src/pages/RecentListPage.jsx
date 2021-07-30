@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import RecentProductList from 'components/recentList/RecentProductList';
+import Filter from 'components/RecentList/Filter';
+import RecentProductList from 'components/RecentList/RecentProductList';
 
 import PRODUCTS from 'fixture/productsData';
 
@@ -8,6 +9,7 @@ class RecentListPage extends Component {
   render() {
     return (
       <>
+        <Filter />
         <RecentProductList products={PRODUCTS} />
       </>
     );
