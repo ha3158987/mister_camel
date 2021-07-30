@@ -4,26 +4,20 @@ import CurrentProduct from 'components/product/CurrentProduct';
 import ProductList from 'components/product/ProductList';
 import PRODUCTS from 'fixture/productsData';
 
-
-import CurrentProduct from 'components/product/CurrentProduct';
-
-import PRODUCTS from 'fixture/productsData';
-
-
 class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: PRODUCTS,
-      latestClickedItem: null
-    }
+      latestClickedItem: null,
+    };
   }
 
-  handleItemClick = (latestClickedItem) => {
+  handleItemClick = latestClickedItem => {
     this.setState({
       ...this.state,
-      latestClickedItem
-    })
+      latestClickedItem,
+    });
     //localStorage 저장
     console.log('아이템 클릭', this.state);
   };
@@ -33,7 +27,10 @@ class ProductPage extends Component {
     return (
       <div>
         <CurrentProduct products={products} />
-        <ProductList products={this.state.products} handleItemClick={this.handleItemClick}/>
+        <ProductList
+          products={this.state.products}
+          handleItemClick={this.handleItemClick}
+        />
       </div>
     );
   }
