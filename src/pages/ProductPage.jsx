@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import CurrentProduct from 'components/product/CurrentProduct';
-import ProductList from 'components/product/ProductList';
+import CurrentProduct from 'components/Product/CurrentProduct';
+import ProductList from 'components/Product/ProductList';
 import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
