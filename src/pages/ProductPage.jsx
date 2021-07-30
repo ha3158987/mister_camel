@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import CurrentProduct from 'components/Product/CurrentProduct';
 
 class ProductPage extends Component {
   render() {
     return (
       <div>
-        
+        <CurrentProduct />
       </div>
-    )
+    );
   }
 }
 
