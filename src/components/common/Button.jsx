@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import styled from '@emotion/styled';
 
-const ButtonStyle = styled.button`
+export const ButtonStyle = styled.button`
   padding: 10px;
   background: #dcdcdc;
 

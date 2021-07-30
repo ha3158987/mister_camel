@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
+import CurrentProduct from 'components/product/CurrentProduct';
 import ProductList from 'components/product/ProductList';
+import PRODUCTS from 'fixture/productsData';
+
+
 import CurrentProduct from 'components/product/CurrentProduct';
 
 import PRODUCTS from 'fixture/productsData';
@@ -25,9 +29,10 @@ class ProductPage extends Component {
   };
 
   render() {
+    const { products } = this.state;
     return (
       <div>
-        <CurrentProduct />
+        <CurrentProduct products={products} />
         <ProductList products={this.state.products} handleItemClick={this.handleItemClick}/>
       </div>
     );
@@ -35,4 +40,3 @@ class ProductPage extends Component {
 }
 
 export default ProductPage;
-// 전체 상품 리스트가 보여지는 페이지
