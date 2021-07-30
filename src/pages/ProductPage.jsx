@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import CurrentProduct from 'components/Product/CurrentProduct';
-import ProductList from 'components/Product/ProductList';
+import CurrentProduct from 'components/product/CurrentProduct';
+import ProductList from 'components/product/ProductList';
 import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
@@ -10,16 +10,17 @@ class ProductPage extends Component {
     this.state = {
       products: PRODUCTS,
       latestClickedItem: null,
-    };
+      clickedItem: []
+    }
   }
 
-  handleItemClick = latestClickedItem => {
+  handleItemClick = (latestClickedItem) => {
+    this.state.clickedItem.push(latestClickedItem);
     this.setState({
       ...this.state,
-      latestClickedItem,
-    });
-    //localStorage 저장
-    console.log('아이템 클릭', this.state);
+      latestClickedItem
+    })
+    localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem))
   };
 
   render() {

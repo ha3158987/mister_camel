@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { IoClose } from 'react-icons/io5';
 import styled from '@emotion/styled';
 import Button from 'components/common/Button';
-import { InputGroup } from 'components/RecentList';
+import { InputGroup } from 'components/recentList';
 
 const FilterPopupStyle = styled.div`
   display: ${({ popupVisible }) => (popupVisible ? 'flex' : 'none')};
