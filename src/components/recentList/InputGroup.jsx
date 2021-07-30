@@ -4,6 +4,11 @@ import styled from '@emotion/styled';
 const InputGroupStyle = styled.div`
   display: inline-block;
 
+  input,
+  label {
+    cursor: pointer;
+  }
+
   & + & {
     margin-top: 5px;
   }
@@ -15,10 +20,16 @@ const InputGroupStyle = styled.div`
 
 class InputGroup extends Component {
   render() {
-    const { children, type, name, value } = this.props;
+    const { children, type, name, value, onChangeHandler } = this.props;
     return (
       <InputGroupStyle>
-        <input type={type} name={name} id={value} value={value} />
+        <input
+          type={type}
+          name={name}
+          id={value}
+          value={value}
+          onChange={e => onChangeHandler(e)}
+        />
         <label htmlFor={value}>{children}</label>
       </InputGroupStyle>
     );
