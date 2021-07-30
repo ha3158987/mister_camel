@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import FilterPopup from './FilterPopup';
-const Button = ({ children, name, ariaLabel }) => {
-  // 더미 컴포넌트
-  return (
-    <button type="button" name={name} aria-label={ariaLabel}>
-      {children}
-    </button>
-  );
-};
+import Button from 'components/common/Button';
 
 class FilterBtns extends Component {
   render() {
