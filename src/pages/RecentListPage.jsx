@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+import RecentProductList from 'components/RecentList/RecentProductList';
+
+import PRODUCTS from 'fixture/productsData';
 
 class RecentListPage extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
-    )
+      <>
+        <RecentProductList products={PRODUCTS} />
+      </>
+    );
   }
 }
 
