@@ -6,7 +6,12 @@ import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
   render() {
-    return <ProductList products={PRODUCTS} />;
+    return (
+      <div>
+        <CurrentProduct />
+        <ProductList products={PRODUCTS} />
+      </div>
+    );
   }
 }
 
