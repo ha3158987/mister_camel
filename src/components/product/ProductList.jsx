@@ -14,6 +14,9 @@ const RandmoButton = styled(ButtonStyle)`
   font-size: 1rem;
 `;
 
+const NotInterestedButton = styled(ButtonStyle)`
+`;
+
 class ProductList extends Component {
   constructor(props) {
     super(props);
@@ -34,9 +37,15 @@ class ProductList extends Component {
     });
   };
 
-  handleButtonClick = e => {
-    e.stopPropagation();
-    console.log('관심 없음 버튼 클릭');
+  handleNotInterestedBtnClick = (title) => {
+    const clickedItems = JSON.parse(localStorage.getItem('viewed'));
+    const updatedItems = clickedItems.map((item) => {
+      if (item.title === title) {
+        item.isInterested = false;
+      } 
+      return item;
+    })
+    localStorage.setItem('viewed', JSON.stringify(updatedItems));
   };
 
   render() {
@@ -52,15 +61,24 @@ class ProductList extends Component {
         {this.handleRandomButtonClick ? (
           <List>
             {lists &&
-              lists.map(({ title, brand, price }, index) => (
+              lists.map(({ title, brand, price, isInterested }, index) => (
                 <ListItem
                   key={index}
                   title={title}
                   brand={brand}
                   price={price}
-                  onClick={() => handleItemClick({ id : index, isInterested: true, title, brand, price })}
+                  isInterested={isInterested}
+                  onClick={() => handleItemClick({ id : index, isInterested, title, brand, price })}
                 >
-                  <Button onClick={this.handleButtonClick}>관심 없음</Button>
+                  <NotInterestedButton
+                    onClick={(e) => {
+                      console.log(e)
+                      e.stopPropagation();
+                      this.handleNotInterestedBtnClick(title)
+                    }}
+                  >
+                    관심 없음
+                  </NotInterestedButton>
                 </ListItem>
               ))}
           </List>
@@ -83,19 +101,15 @@ class ProductList extends Component {
                     })
                   }
                 >
-                  <Button
-                    onClick={() =>
-                      this.handleNoInterestBtnClick.bind({
-                        id: index,
-                        isInterested: false,
-                        title,
-                        brand,
-                        price,
-                      })
-                    }
+                  <NotInterestedButton
+                    onClick={(e) => {
+                      console.log(e)
+                      e.stopPropagation();
+                      this.handleNotInterestedBtnClick(title)
+                    }}
                   >
                     관심 없음
-                  </Button>
+                  </NotInterestedButton>
                 </ListItem>
               ))}
           </List>

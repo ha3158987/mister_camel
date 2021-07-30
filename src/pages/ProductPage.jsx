@@ -8,7 +8,10 @@ class ProductPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: PRODUCTS,
+      products: PRODUCTS.map((product) => {
+        product.isInterested = true;
+        return product;
+      }),
       latestClickedItem: null,
       clickedItem: []
     }
