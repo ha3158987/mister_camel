@@ -18,21 +18,31 @@ class ProductPage extends Component {
     this.state.clickedItem.push(latestClickedItem);
     this.setState({
       ...this.state,
+      ...this.clickedItem,
       latestClickedItem
     })
     localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem))
   };
 
   render() {
-    const { products } = this.state;
+    const { products, latestClickedItem } = this.state;
     return (
-      <div>
-        <CurrentProduct products={products} />
-        <ProductList
-          products={this.state.products}
-          handleItemClick={this.handleItemClick}
-        />
-      </div>
+      <>
+        {
+        this.state.latestClickedItem !== null
+        ? <>
+          <CurrentProduct latestClickedItem={latestClickedItem}/>
+          <ProductList
+            products={products}
+            handleItemClick={this.handleItemClick}
+          />
+          </>
+        : <ProductList
+            products={products}
+            handleItemClick={this.handleItemClick}
+          />
+        }
+      </>
     );
   }
 }

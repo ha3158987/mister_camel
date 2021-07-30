@@ -58,9 +58,7 @@ class ProductList extends Component {
                   title={title}
                   brand={brand}
                   price={price}
-                  onClick={() =>
-                    handleItemClick({ title, brand, price, id: index })
-                  }
+                  onClick={() => handleItemClick({ id : index, isInterested: true, title, brand, price })}
                 >
                   <Button onClick={this.handleButtonClick}>관심 없음</Button>
                 </ListItem>
