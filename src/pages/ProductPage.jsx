@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
 import ProductList from 'components/Product/ProductList';
+import CurrentProduct from 'components/Product/CurrentProduct';
 
-import PRODUCTS from 'fixture/productsData';
+// import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
   render() {
     return (
       <div>
         <CurrentProduct />
-        <ProductList products={PRODUCTS} />
+        {/*<ProductList products={PRODUCTS} />*/}
       </div>
     );
   }
