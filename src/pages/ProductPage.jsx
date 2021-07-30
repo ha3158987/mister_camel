@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+
+import ProductList from 'components/Product/ProductList';
+
+import PRODUCTS from 'fixture/productsData';
 
 class ProductPage extends Component {
   render() {
-    return (
-      <div>
-        
-      </div>
-    )
+    return <ProductList products={PRODUCTS} />;
   }
 }
 
