@@ -10,16 +10,17 @@ class ProductPage extends Component {
     this.state = {
       products: PRODUCTS,
       latestClickedItem: null,
-    };
+      clickedItem: []
+    }
   }
 
-  handleItemClick = latestClickedItem => {
+  handleItemClick = (latestClickedItem) => {
+    this.state.clickedItem.push(latestClickedItem);
     this.setState({
       ...this.state,
-      latestClickedItem,
-    });
-    //localStorage 저장
-    console.log('아이템 클릭', this.state);
+      latestClickedItem
+    })
+    localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem))
   };
 
   render() {

@@ -67,22 +67,23 @@ class ProductList extends Component {
               ))}
           </List>
         ) : (
-          <List>
-            {products &&
-              products.map(({ title, brand, price }, index) => (
-                <ListItem
-                  key={index}
-                  title={title}
-                  brand={brand}
-                  price={price}
-                  onClick={() =>
-                    handleItemClick({ title, brand, price, id: index })
-                  }
-                >
-                  <Button onClick={this.handleButtonClick}>관심 없음</Button>
-                </ListItem>
-              ))}
-          </List>
+        {products && products.map(({ title, brand, price }, index) => (
+          <ListItem
+            key={index}
+            title={title}
+            brand={brand}
+            price={price}
+            onClick={() => handleItemClick({ id : index, isInterested: true, title, brand, price })}
+          >
+            <Button
+              onClick={() => this.handleNoInterestBtnClick.bind({ id : index, isInterested: false, title, brand, price })}
+            >
+              관심 없음
+            </Button>
+          </ListItem>
+        ))}
+      </List>
+
         )}
       </>
     );
