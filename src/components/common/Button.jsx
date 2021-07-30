@@ -11,14 +11,15 @@ const ButtonStyle = styled.button`
 
 class Button extends Component {
   render() {
-    const { children, onClick, name, ariaLabel } = this.props;
+    const { children, onClick, name, ariaLabel, className } = this.props;
 
     return (
       <ButtonStyle
         type="button"
-        onClick={onClick}
+        onClick={() => onClick(name)}
         name={name}
         aria-label={ariaLabel}
+        className={className}
       >
         {children}
       </ButtonStyle>
