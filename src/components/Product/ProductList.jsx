@@ -31,10 +31,6 @@ class ProductList extends Component {
     });
   };
 
-  handleItemClick = e => {
-    console.log('아이템 클릭');
-  };
-
   handleButtonClick = e => {
     e.stopPropagation();
 
