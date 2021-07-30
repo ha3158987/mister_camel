@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from '@emotion/styled';
-import { FilterBtns, InputGroup } from 'components/RecentList';
+import { FilterBtns, InputGroup } from 'components/recentList';
 
 const FilterStyle = styled.div`
   position: relative;
