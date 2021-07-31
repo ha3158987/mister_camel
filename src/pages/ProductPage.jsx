@@ -38,6 +38,16 @@ class ProductPage extends Component {
         value: [this.state.latestClickedItem, ...this.state.clickedItem],
       });
     }
+    else if (this.state.products !== prevState.products) {
+      let prevClickedItem = [...this.state.clickedItem];
+      this.state.products.forEach((product) => {
+          for(let item of prevClickedItem) {
+            if (product.isInterested === false && product.title === item.title) {
+              item.isInterested = false;
+            }
+          }
+      })
+    }
 
     localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem));
   };

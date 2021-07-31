@@ -39,14 +39,10 @@ class ProductList extends Component {
 
   handleNotInterestedBtnClick = title => {
     const { products, handleStateChange } = this.props;
-
     const updatedItems = products.map(item => ({
       ...item,
       isInterested: item.title === title ? false : true,
     }));
-
-    handleStateChange({ key: 'products', value: updatedItems });
-
     handleStateChange({ key: 'products', value: updatedItems });
   };
 
