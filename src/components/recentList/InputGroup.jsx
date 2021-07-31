@@ -20,7 +20,8 @@ const InputGroupStyle = styled.div`
 
 class InputGroup extends Component {
   render() {
-    const { children, type, name, value, onChangeHandler } = this.props;
+    const { children, type, name, value, onChangeHandler, useChecked } =
+      this.props;
     return (
       <InputGroupStyle>
         <input
@@ -29,6 +30,7 @@ class InputGroup extends Component {
           id={value}
           value={value}
           onChange={e => onChangeHandler(e)}
+          checked={useChecked}
         />
         <label htmlFor={value}>{children}</label>
       </InputGroupStyle>

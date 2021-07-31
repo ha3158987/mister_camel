@@ -45,6 +45,7 @@ class FilterPopup extends Component {
           name={'sort_filter'}
           value={'recent_view'}
           onChangeHandler={onChangeHandler}
+          useChecked={false}
         >
           최근 조회 순
         </InputGroup>
@@ -53,6 +54,7 @@ class FilterPopup extends Component {
           name={'sort_filter'}
           value={'row_price'}
           onChangeHandler={onChangeHandler}
+          useChecked={false}
         >
           낮은 가격 순
         </InputGroup>
