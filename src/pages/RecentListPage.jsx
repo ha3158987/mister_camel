@@ -14,6 +14,7 @@ class RecentListPage extends Component {
       clickedItems: [],
       filteredItems: [],
       selectedBrands: [],
+      popupVisible: false,
       hideCheckBoxState: false,
       brandState: {
         gucci: false,
@@ -86,7 +87,6 @@ class RecentListPage extends Component {
     });
 
     this.makeClickedItemFiltered(!this.state.hideCheckBoxState);
-    console.log(`${name} 클릭`);
   };
 
   makeClickedItemFiltered = isChecked => {
@@ -129,11 +129,33 @@ class RecentListPage extends Component {
   };
 
   sortRecentView = () => {
-    console.log('sortRecentView');
+    const flag = this.state.selectedBrands.length > 0;
+    if (flag) {
+      // 필터된거
+      this.makeClickedItemFiltered(!this.state.hideCheckBoxState);
+    } else {
+      // 전체 목록
+      this.getClickedItem();
+    }
+    this.setPopupState();
   };
 
   sortRowPrice = () => {
-    console.log('sortRowPrice');
+    const flag = this.state.selectedBrands.length > 0;
+    if (flag) {
+      // 필터된거
+      this.setState(state => ({
+        ...state,
+        filteredItems: state.filteredItems.sort((a, b) => a.price - b.price),
+      }));
+    } else {
+      // 전체 목록
+      this.setState(state => ({
+        ...state,
+        clickedItems: state.clickedItems.sort((a, b) => a.price - b.price),
+      }));
+    }
+    this.setPopupState();
   };
 
   checkBoxHandler = e => {
@@ -151,6 +173,13 @@ class RecentListPage extends Component {
       default:
         break;
     }
+  };
+
+  setPopupState = () => {
+    this.setState(state => ({
+      ...state,
+      popupVisible: !state.popupVisible,
+    }));
   };
 
   render() {
@@ -176,6 +205,8 @@ class RecentListPage extends Component {
         <Filter
           setBrandState={this.setBrandState}
           brandState={this.state.brandState}
+          popupVisible={this.state.popupVisible}
+          setPopupState={this.setPopupState}
           checkBoxHandler={this.checkBoxHandler}
         />
         {this.state.isLoading && <span>로딩 중 입니다.</span>}
