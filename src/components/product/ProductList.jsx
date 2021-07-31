@@ -30,6 +30,7 @@ class ProductList extends Component {
     const itemLists = this.state.lists.map(item => item);
     for (let i = 0; i < this.props.products.length - 1; i++) {
       const randomLists = Math.floor(Math.random() * (itemLists.length - 1));
+
       lists.push(itemLists[randomLists + 1]);
     }
     this.setState({
@@ -38,19 +39,31 @@ class ProductList extends Component {
   };
 
   handleNotInterestedBtnClick = (title) => {
-    const clickedItems = JSON.parse(localStorage.getItem('viewed'));
-    const updatedItems = clickedItems.map((item) => {
-      if (item.title === title) {
-        item.isInterested = false;
-      } 
-      return item;
-    })
-    localStorage.setItem('viewed', JSON.stringify(updatedItems));
+    // const clickedItems = JSON.parse(localStorage.getItem('viewed'));
+    const {products, handleStateChange} = this.props;
+    
+    const updatedItems = products.map((item) => ({
+      ...item,
+      isInterested : item.title === title ? false : true
+    }))
+
+    // localStorage.setItem('viewed', JSON.stringify(updatedItems));
+
+    console.log({updatedItems});
+
+    handleStateChange({key: "products", value: updatedItems});
+    
+    handleStateChange({key: "products", value: updatedItems});
   };
 
   render() {
     const { products, handleItemClick } = this.props;
     const { lists } = this.state;
+
+    console.log('========');
+    console.log('products ? ', this.props.products);
+    console.log('list ? ', this.state.list);
+
     return (
       <>
         <RandomButtonBlock>
@@ -103,7 +116,7 @@ class ProductList extends Component {
                 >
                   <NotInterestedButton
                     onClick={(e) => {
-                      console.log(e)
+                      // console.log(e)
                       e.stopPropagation();
                       this.handleNotInterestedBtnClick(title)
                     }}

@@ -13,38 +13,48 @@ class ProductPage extends Component {
         return product;
       }),
       latestClickedItem: null,
-      clickedItem: []
+      clickedItem: [],
     }
   }
 
-  handleItemClick = (latestClickedItem) => {
-    this.state.clickedItem.push(latestClickedItem);
+  handleStateChange = ({key, value}) => {
     this.setState({
       ...this.state,
-      ...this.clickedItem,
-      latestClickedItem
+      [key] : value
     })
+  }
+
+  handleItemClick = (latestClickedItem) => {
+    this.handleStateChange({key : 'latestClickedItem', value: latestClickedItem});
+
+    this.handleStateChange({key : 'clikedItem', value: [latestClickedItem, ...this.state.clickedItem]});
+
     localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem))
   };
 
+  componentDidUpdate = (_prevProps, prevState) => {
+    console.log('prevState ? ', prevState);
+    // console.log('this.state.latestClickedItem ? ', this.state.latestClickedItem)
+    
+    // if(this.state.latestClickedItem !== prevState.latestClickedItem) {
+    //   this.handleStateChange({key : 'clikedItem', value: [this.state.latestClickedItem, ...this.state.clickedItem]});
+    // }
+
+    // console.log(this.state.latestClickedItem, this.state.clickedItem)
+  }
+  
   render() {
-    const { products, latestClickedItem } = this.state;
+    const { products, latestClickedItem, clickedItem } = this.state;
+    
+
     return (
       <>
-        {
-        this.state.latestClickedItem !== null
-        ? <>
-          <CurrentProduct latestClickedItem={latestClickedItem}/>
+        {this.state.latestClickedItem && <CurrentProduct latestClickedItem={latestClickedItem}/>}
           <ProductList
             products={products}
             handleItemClick={this.handleItemClick}
+            handleStateChange={this.handleStateChange}
           />
-          </>
-        : <ProductList
-            products={products}
-            handleItemClick={this.handleItemClick}
-          />
-        }
       </>
     );
   }
