@@ -57,6 +57,7 @@ const Tag = styled.p`
 class ListItem extends Component {
   render() {
     const { title, brand, price, src, onClick, children } = this.props;
+    const totalPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
     return (
       <Item onClick={onClick}>
@@ -66,7 +67,7 @@ class ListItem extends Component {
           <Tag>
             <span>{brand}</span>
           </Tag>
-          <Price>{price}원</Price>
+          <Price>{totalPrice}원</Price>
         </Content>
         {children}
       </Item>

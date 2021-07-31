@@ -14,8 +14,19 @@ class ProductPage extends Component {
       }),
       latestClickedItem: null,
       clickedItem: [],
+      scrollTop: 0,
     };
   }
+
+  handleTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+    this.setState({
+      scrollTop: 0,
+    });
+  };
 
   handleStateChange = ({ key, value }) => {
     this.setState({
@@ -29,24 +40,26 @@ class ProductPage extends Component {
       key: 'latestClickedItem',
       value: latestClickedItem,
     });
+    this.handleTop();
   };
 
   componentDidUpdate = (_prevProps, prevState) => {
-    if (this.state.latestClickedItem?.title !== prevState.latestClickedItem?.title) {
+    if (
+      this.state.latestClickedItem?.title !== prevState.latestClickedItem?.title
+    ) {
       this.handleStateChange({
         key: 'clickedItem',
         value: [this.state.latestClickedItem, ...this.state.clickedItem],
       });
-    }
-    else if (this.state.products !== prevState.products) {
+    } else if (this.state.products !== prevState.products) {
       let prevClickedItem = [...this.state.clickedItem];
-      this.state.products.forEach((product) => {
-          for(let item of prevClickedItem) {
-            if (product.isInterested === false && product.title === item.title) {
-              item.isInterested = false;
-            }
+      this.state.products.forEach(product => {
+        for (let item of prevClickedItem) {
+          if (product.isInterested === false && product.title === item.title) {
+            item.isInterested = false;
           }
-      })
+        }
+      });
     }
 
     localStorage.setItem('viewed', JSON.stringify(this.state.clickedItem));
