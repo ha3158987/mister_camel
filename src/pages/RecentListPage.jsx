@@ -14,6 +14,7 @@ class RecentListPage extends Component {
       clickedItems: [],
       filteredItems: [],
       selectedBrands: [],
+      hideCheckBoxState: false,
       brandState: {
         gucci: false,
         nike: false,
@@ -28,6 +29,7 @@ class RecentListPage extends Component {
   //   clickedItems: [],
   // };
 
+  /* brand 버튼 관련 기능 */
   addSelectedBrandList = name => {
     this.setState(state => ({
       selectedBrands:
@@ -83,15 +85,72 @@ class RecentListPage extends Component {
       }
     });
 
+    this.makeClickedItemFiltered(!this.state.hideCheckBoxState);
+    console.log(`${name} 클릭`);
+  };
+
+  makeClickedItemFiltered = isChecked => {
     this.setState(state => ({
       ...state,
-      filteredItems: state.clickedItems.filter(({ brand }) =>
-        state.selectedBrands.length > 0
-          ? state.selectedBrands.includes(changeKoToEn(brand))
-          : true,
-      ),
+      filteredItems: state.clickedItems.filter(({ brand, isInterested }) => {
+        if (!isChecked) {
+          // 숨기기 해제했을 때
+          return state.selectedBrands.includes(changeKoToEn(brand));
+        } else {
+          // 숨기기 설정했을 때
+          return (
+            state.selectedBrands.includes(changeKoToEn(brand)) && isInterested
+          );
+        }
+      }),
     }));
-    console.log(`${name} 클릭`);
+  };
+
+  /* 체크박스 관련 기능 */
+  hideNoInterest = () => {
+    // 토글 버튼 상태 변경
+    this.setState(state => ({
+      ...state,
+      hideCheckBoxState: !state.hideCheckBoxState,
+    }));
+
+    const flag = this.state.selectedBrands.length > 0;
+    if (flag) {
+      this.makeClickedItemFiltered(!this.state.hideCheckBoxState);
+    } else {
+      this.state.hideCheckBoxState
+        ? this.getClickedItem()
+        : this.setState(state => ({
+            clickedItems: state.clickedItems.filter(
+              ({ isInterested }) => isInterested === true,
+            ),
+          }));
+    }
+  };
+
+  sortRecentView = () => {
+    console.log('sortRecentView');
+  };
+
+  sortRowPrice = () => {
+    console.log('sortRowPrice');
+  };
+
+  checkBoxHandler = e => {
+    const { value } = e.currentTarget;
+    switch (value) {
+      case 'hide_no_interest':
+        this.hideNoInterest();
+        break;
+      case 'recent_view':
+        this.sortRecentView();
+        break;
+      case 'row_price':
+        this.sortRowPrice();
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
@@ -117,6 +176,7 @@ class RecentListPage extends Component {
         <Filter
           setBrandState={this.setBrandState}
           brandState={this.state.brandState}
+          checkBoxHandler={this.checkBoxHandler}
         />
         {this.state.isLoading && <span>로딩 중 입니다.</span>}
         {!this.state.isLoading && this.state.clickedItems.length === 0 && (
@@ -133,7 +193,7 @@ class RecentListPage extends Component {
     );
   }
 
-  componentDidMount() {
+  getClickedItem = () => {
     const clickedItems = JSON.parse(localStorage.getItem('viewed'));
     //실제 API가 있을 경우, 비동기로 들어올 것을 고려해 시뮬레이팅함.
     setTimeout(() => {
@@ -149,6 +209,10 @@ class RecentListPage extends Component {
         });
       }
     }, 1500);
+  };
+
+  componentDidMount() {
+    this.getClickedItem();
   }
 }
 
