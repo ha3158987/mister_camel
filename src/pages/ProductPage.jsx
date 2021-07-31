@@ -32,7 +32,7 @@ class ProductPage extends Component {
   };
 
   componentDidUpdate = (_prevProps, prevState) => {
-    if (this.state.latestClickedItem !== prevState.latestClickedItem) {
+    if (this.state.latestClickedItem?.title !== prevState.latestClickedItem?.title) {
       this.handleStateChange({
         key: 'clickedItem',
         value: [this.state.latestClickedItem, ...this.state.clickedItem],
