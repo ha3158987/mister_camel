@@ -43,7 +43,7 @@ class CurrentProduct extends Component {
   render() {
     const { latestClickedItem } = this.props;
     const { title, brand, price } = latestClickedItem;
-
+    const totalPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return (
       <ProductWrapper>
         <div>
@@ -55,7 +55,7 @@ class CurrentProduct extends Component {
         <ProductTextBlock>
           <Title>{title}</Title>
           <Tag>{brand}</Tag>
-          <Price>{price}</Price>
+          <Price>{totalPrice}원</Price>
         </ProductTextBlock>
       </ProductWrapper>
     );

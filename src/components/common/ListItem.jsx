@@ -61,7 +61,9 @@ const AlertMessage = styled.div`
 
 class ListItem extends Component {
   render() {
+    const totalPrice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     const { title, brand, isInterested, price, src, onClick, isClicked, children } = this.props;
+
 
     return (
       <Item onClick={onClick}>
@@ -71,7 +73,7 @@ class ListItem extends Component {
           <Tag>
             <span>{brand}</span>
           </Tag>
-          <Price>{price}원</Price>
+          <Price>{totalPrice}원</Price>
         </Content>
         {children}
         {!isInterested && isClicked && <AlertMessage>'관심없음을 해제한 후 다시 클릭해주세요🙅🏻‍♀️'</AlertMessage>}
