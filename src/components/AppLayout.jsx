@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import logo from 'images/mr.camel_logo.png';
 
 import styled from '@emotion/styled';
 
@@ -12,7 +13,11 @@ const Body = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    background: #dcdcdc;
+    background: white;
+    border-bottom: solid 2px rgba(0, 0, 0, 0.34);
+    img {
+      width: 70px;
+    }
   }
 
   main {
@@ -27,12 +32,12 @@ class AppLayout extends Component {
     return (
       <Body>
         <header>
-          <h1>
-            <Link to="/">로고</Link>
-          </h1>
-          <p>
-            <Link to="/recentList">최근</Link>
-          </p>
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
+          <Link to="/recentList">
+            <span>최근</span>
+          </Link>
         </header>
         <main>{children}</main>
       </Body>
