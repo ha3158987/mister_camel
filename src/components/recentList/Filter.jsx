@@ -41,6 +41,7 @@ class Filter extends Component {
     }
   };
   render() {
+    const { setBrandState, brandState } = this.props;
     return (
       <FilterStyle>
         <InputGroup
@@ -51,7 +52,11 @@ class Filter extends Component {
         >
           관심 없는 상품 숨기기
         </InputGroup>
-        <FilterBtns onChangeHandler={this.checkBoxHandler} />
+        <FilterBtns
+          brandState={brandState}
+          setBrandState={setBrandState}
+          onChangeHandler={this.checkBoxHandler}
+        />
       </FilterStyle>
     );
   }

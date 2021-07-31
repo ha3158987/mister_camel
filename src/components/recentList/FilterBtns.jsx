@@ -44,10 +44,6 @@ class FilterBtns extends Component {
     super(props);
     this.state = {
       popupVisible: false,
-      gucci: false,
-      nike: false,
-      louis_vuitton: false,
-      stone_island: false,
     };
   }
   setPopupState = () => {
@@ -56,54 +52,37 @@ class FilterBtns extends Component {
       popupVisible: !state.popupVisible,
     }));
   };
-  setBrandState = name => {
-    this.setState(state => {
-      switch (name) {
-        case GUCCI.EN:
-          return { ...state, gucci: !state.gucci };
-        case NIKE.EN:
-          return { ...state, nike: !state.nike };
-        case STONE_ISLAND.EN:
-          return { ...state, stone_island: !state.stone_island };
-        case LOUIS_VUITTON.EN:
-          return { ...state, louis_vuitton: !state.louis_vuitton };
-        default:
-          break;
-      }
-    });
-    console.log(`${name} 클릭`);
-  };
 
   render() {
-    const { onChangeHandler } = this.props;
+    const { brandState, setBrandState, onChangeHandler } = this.props;
     return (
       <FilterBtnsStyle>
         <div>
           <BrandButtonStyle
             name={GUCCI.EN}
-            active={this.state.gucci}
-            onClick={this.setBrandState}
+            active={brandState.gucci}
+            onClick={setBrandState}
           >
             구찌
           </BrandButtonStyle>
           <BrandButtonStyle
             name={NIKE.EN}
-            active={this.state.nike}
-            onClick={this.setBrandState}
+            active={brandState.nike}
+            onClick={setBrandState}
           >
             나이키
           </BrandButtonStyle>
           <BrandButtonStyle
             name={LOUIS_VUITTON.EN}
-            active={this.state.louis_vuitton}
-            onClick={this.setBrandState}
+            active={brandState.louis_vuitton}
+            onClick={setBrandState}
           >
             루이비통
           </BrandButtonStyle>
           <BrandButtonStyle
             name={STONE_ISLAND.EN}
-            active={this.state.stone_island}
-            onClick={this.setBrandState}
+            active={brandState.stone_island}
+            onClick={setBrandState}
           >
             스톤 아일랜드
           </BrandButtonStyle>
