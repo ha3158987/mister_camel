@@ -2,7 +2,7 @@ import { Component } from 'react';
 
 import List from 'components/common/List';
 import ListItem from 'components/common/ListItem';
-import Button, { ButtonStyle } from 'components/common/Button';
+import { ButtonStyle } from 'components/common/Button';
 import styled from '@emotion/styled';
 
 const RandomButtonBlock = styled.div`
@@ -14,8 +14,7 @@ const RandmoButton = styled(ButtonStyle)`
   font-size: 1rem;
 `;
 
-const NotInterestedButton = styled(ButtonStyle)`
-`;
+const NotInterestedButton = styled(ButtonStyle)``;
 
 class ProductList extends Component {
   constructor(props) {
@@ -38,31 +37,22 @@ class ProductList extends Component {
     });
   };
 
-  handleNotInterestedBtnClick = (title) => {
-    // const clickedItems = JSON.parse(localStorage.getItem('viewed'));
-    const {products, handleStateChange} = this.props;
-    
-    const updatedItems = products.map((item) => ({
+  handleNotInterestedBtnClick = title => {
+    const { products, handleStateChange } = this.props;
+
+    const updatedItems = products.map(item => ({
       ...item,
-      isInterested : item.title === title ? false : true
-    }))
+      isInterested: item.title === title ? false : true,
+    }));
 
-    // localStorage.setItem('viewed', JSON.stringify(updatedItems));
+    handleStateChange({ key: 'products', value: updatedItems });
 
-    console.log({updatedItems});
-
-    handleStateChange({key: "products", value: updatedItems});
-    
-    handleStateChange({key: "products", value: updatedItems});
+    handleStateChange({ key: 'products', value: updatedItems });
   };
 
   render() {
     const { products, handleItemClick } = this.props;
     const { lists } = this.state;
-
-    console.log('========');
-    console.log('products ? ', this.props.products);
-    console.log('list ? ', this.state.list);
 
     return (
       <>
@@ -81,13 +71,21 @@ class ProductList extends Component {
                   brand={brand}
                   price={price}
                   isInterested={isInterested}
-                  onClick={() => handleItemClick({ id : index, isInterested, title, brand, price })}
+                  onClick={() =>
+                    handleItemClick({
+                      id: index,
+                      isInterested,
+                      title,
+                      brand,
+                      price,
+                    })
+                  }
                 >
                   <NotInterestedButton
-                    onClick={(e) => {
-                      console.log(e)
+                    onClick={e => {
+                      console.log(e);
                       e.stopPropagation();
-                      this.handleNotInterestedBtnClick(title)
+                      this.handleNotInterestedBtnClick(title);
                     }}
                   >
                     관심 없음
@@ -115,10 +113,10 @@ class ProductList extends Component {
                   }
                 >
                   <NotInterestedButton
-                    onClick={(e) => {
+                    onClick={e => {
                       // console.log(e)
                       e.stopPropagation();
-                      this.handleNotInterestedBtnClick(title)
+                      this.handleNotInterestedBtnClick(title);
                     }}
                   >
                     관심 없음
