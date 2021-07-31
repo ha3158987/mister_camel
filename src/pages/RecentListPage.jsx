@@ -98,9 +98,7 @@ class RecentListPage extends Component {
           return state.selectedBrands.includes(changeKoToEn(brand));
         } else {
           // 숨기기 설정했을 때
-          return (
-            state.selectedBrands.includes(changeKoToEn(brand)) && isInterested
-          );
+          return state.selectedBrands.includes(changeKoToEn(brand));
         }
       }),
     }));
@@ -116,8 +114,17 @@ class RecentListPage extends Component {
 
     const flag = this.state.selectedBrands.length > 0;
     if (flag) {
-      this.makeClickedItemFiltered(!this.state.hideCheckBoxState);
+      // 필터된 거
+      this.state.hideCheckBoxState
+        ? this.makeClickedItemFiltered(!this.state.hideCheckBoxState)
+        : this.setState(state => ({
+            ...state,
+            filteredItems: state.filteredItems.filter(
+              ({ isInterested }) => isInterested === true,
+            ),
+          }));
     } else {
+      // 전체 목록
       this.state.hideCheckBoxState
         ? this.getClickedItem()
         : this.setState(state => ({
