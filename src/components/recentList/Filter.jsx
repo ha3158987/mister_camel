@@ -13,7 +13,13 @@ const FilterStyle = styled.div`
 
 class Filter extends Component {
   render() {
-    const { setBrandState, brandState, checkBoxHandler } = this.props;
+    const {
+      setBrandState,
+      setPopupState,
+      brandState,
+      popupVisible,
+      checkBoxHandler,
+    } = this.props;
     return (
       <FilterStyle>
         <InputGroup
@@ -26,6 +32,8 @@ class Filter extends Component {
         </InputGroup>
         <FilterBtns
           brandState={brandState}
+          popupVisible={popupVisible}
+          setPopupState={setPopupState}
           setBrandState={setBrandState}
           onChangeHandler={checkBoxHandler}
         />
