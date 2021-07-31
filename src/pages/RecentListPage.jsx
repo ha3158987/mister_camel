@@ -117,16 +117,24 @@ class RecentListPage extends Component {
 
   sortRecentView = () => {
     const isFiltered = this.state.filteredItems.length > 0;
-    const { checkBoxState } = this.state;
+    const { checkBoxState, selectedBrands } = this.state;
+    this.getClickedItem();
     if (isFiltered && checkBoxState) {
-      this.getClickedItem();
-      checkBoxState &&
+      selectedBrands.length > 0 &&
         this.setState(state => ({
           ...state,
           filteredItems: state.clickedItems.filter(
             ({ brand, isInterested }) =>
               state.selectedBrands.includes(changeKoToEn(brand)) &&
               isInterested,
+          ),
+        }));
+
+      !(selectedBrands.length > 0) &&
+        this.setState(state => ({
+          ...state,
+          filteredItems: state.clickedItems.filter(
+            ({ isInterested }) => isInterested,
           ),
         }));
     } else {
