@@ -14,11 +14,11 @@ const FilterStyle = styled.div`
 class Filter extends Component {
   render() {
     const {
-      setBrandState,
+      brandButtonHandler,
       setPopupState,
-      brandState,
       popupVisible,
       checkBoxHandler,
+      selectedBrands,
     } = this.props;
     return (
       <FilterStyle>
@@ -31,11 +31,11 @@ class Filter extends Component {
           관심 없는 상품 숨기기
         </InputGroup>
         <FilterBtns
-          brandState={brandState}
           popupVisible={popupVisible}
           setPopupState={setPopupState}
-          setBrandState={setBrandState}
+          brandButtonHandler={brandButtonHandler}
           onChangeHandler={checkBoxHandler}
+          selectedBrands={selectedBrands}
         />
       </FilterStyle>
     );

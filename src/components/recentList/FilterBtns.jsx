@@ -42,40 +42,43 @@ const { GUCCI, NIKE, LOUIS_VUITTON, STONE_ISLAND } = brands;
 class FilterBtns extends Component {
   render() {
     const {
-      brandState,
       popupVisible,
-      setBrandState,
+      brandButtonHandler,
       onChangeHandler,
       setPopupState,
+      selectedBrands,
     } = this.props;
+    const isActive = name => {
+      return selectedBrands.length > 0 && selectedBrands.includes(name);
+    };
     return (
       <FilterBtnsStyle>
         <div>
           <BrandButtonStyle
             name={GUCCI.EN}
-            active={brandState.gucci}
-            onClick={setBrandState}
+            active={isActive(GUCCI.EN)}
+            onClick={brandButtonHandler}
           >
             구찌
           </BrandButtonStyle>
           <BrandButtonStyle
             name={NIKE.EN}
-            active={brandState.nike}
-            onClick={setBrandState}
+            active={isActive(NIKE.EN)}
+            onClick={brandButtonHandler}
           >
             나이키
           </BrandButtonStyle>
           <BrandButtonStyle
             name={LOUIS_VUITTON.EN}
-            active={brandState.louis_vuitton}
-            onClick={setBrandState}
+            active={isActive(LOUIS_VUITTON.EN)}
+            onClick={brandButtonHandler}
           >
             루이비통
           </BrandButtonStyle>
           <BrandButtonStyle
             name={STONE_ISLAND.EN}
-            active={brandState.stone_island}
-            onClick={setBrandState}
+            active={isActive(STONE_ISLAND.EN)}
+            onClick={brandButtonHandler}
           >
             스톤 아일랜드
           </BrandButtonStyle>
