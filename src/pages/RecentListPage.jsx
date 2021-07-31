@@ -220,13 +220,15 @@ class RecentListPage extends Component {
         {!this.state.isLoading && this.state.clickedItems.length === 0 && (
           <span>클릭한 아이템이 없습니다.</span>
         )}
-        <RecentProductList
-          products={
-            this.state.filteredItems.length > 0
-              ? this.state.filteredItems
-              : this.state.clickedItems
-          }
-        />
+        {!this.state.isLoading && (
+          <RecentProductList
+            products={
+              this.state.filteredItems.length > 0
+                ? this.state.filteredItems
+                : this.state.clickedItems
+            }
+          />
+        )}
       </>
     );
   }
@@ -234,6 +236,10 @@ class RecentListPage extends Component {
   getClickedItem = () => {
     const clickedItems = JSON.parse(localStorage.getItem('viewed'));
     //실제 API가 있을 경우, 비동기로 들어올 것을 고려해 시뮬레이팅함.
+    this.setState(state => ({
+      ...state,
+      isLoading: true,
+    }));
     setTimeout(() => {
       if (!clickedItems) {
         this.setState({
@@ -242,11 +248,11 @@ class RecentListPage extends Component {
         });
       } else {
         this.setState({
-          isLoading: false, 
+          isLoading: false,
           clickedItems,
         });
       }
-    }, 1500);
+    }, 500);
   };
 
   componentDidMount() {
