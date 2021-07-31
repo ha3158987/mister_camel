@@ -42,7 +42,6 @@ const Price = styled.span`
 class CurrentProduct extends Component {
   render() {
     const { latestClickedItem } = this.props;
-    console.log(latestClickedItem);
     const { title, brand, price } = latestClickedItem;
 
     return (

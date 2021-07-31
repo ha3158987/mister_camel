@@ -242,7 +242,7 @@ class RecentListPage extends Component {
         });
       } else {
         this.setState({
-          isLoading: false,
+          isLoading: false, 
           clickedItems,
         });
       }
